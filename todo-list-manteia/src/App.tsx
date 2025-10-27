@@ -1,27 +1,47 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTheme } from './context/ThemeContext'
 import { AddTodo } from './components/AddTodo'
+import { TodoList } from './components/TodoList'
 
 interface Todo {
   id: number;
   text: string;
 }
 
+const STORAGE_KEY = 'todos';
+
 function App() {
   const { theme, toggleTheme } = useTheme();
-  const [todos, setTodos] = useState<Todo[]>([]);
+
+
+  const [todos, setTodos] = useState<Todo[]>(() => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      try {
+        return JSON.parse(stored) as Todo[];
+      } catch (error) {
+        console.error('Errore nel parsing delle todo salvate:', error);
+      }
+    }
+    return [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+  }, [todos]);
 
   const handleAddTodo = (text: string) => {
-    const newTodo: Todo = {
-      id: Date.now(),
-      text
-    };
+    const newTodo: Todo = { id: Date.now(), text };
     setTodos(prev => [...prev, newTodo]);
+  };
+
+  const handleRemoveTodo = (id: number) => {
+    setTodos(prev => prev.filter(todo => todo.id !== id));
   };
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Todo List</h1>
+      <h1>Todo List 📝</h1>
       <button
         onClick={toggleTheme}
         style={{
@@ -37,12 +57,7 @@ function App() {
       </button>
 
       <AddTodo onAdd={handleAddTodo} />
-
-      <ul style={{ marginTop: '20px' }}>
-        {todos.map(todo => (
-          <li key={todo.id}>{todo.text}</li>
-        ))}
-      </ul>
+      <TodoList todos={todos} onRemove={handleRemoveTodo} />
     </div>
   );
 }
