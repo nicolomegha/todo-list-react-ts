@@ -1,10 +1,12 @@
 interface TodoItemProps {
     id: number;
     text: string;
+    completed: boolean;
     onRemove: (id: number) => void;
+    onToggle: (id: number) => void;
   }
   
-  export const TodoItem = ({ id, text, onRemove }: TodoItemProps) => {
+  export const TodoItem = ({ id, text, completed, onRemove, onToggle }: TodoItemProps) => {
     return (
       <li
         style={{
@@ -13,12 +15,24 @@ interface TodoItemProps {
           alignItems: 'center',
           padding: '8px',
           marginBottom: '8px',
-          backgroundColor: '#f4f4f4',
+          backgroundColor: completed ? '#d4edda' : '#f4f4f4',
           borderRadius: '4px',
           listStyle: 'none'
         }}
       >
-        <span>{text}</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <input
+            type="checkbox"
+            checked={completed}
+            onChange={() => onToggle(id)}
+          />
+          <span style={{
+            textDecoration: completed ? 'line-through' : 'none',
+            opacity: completed ? 0.6 : 1
+          }}>
+            {text}
+          </span>
+        </div>
         <button
           onClick={() => onRemove(id)}
           style={{

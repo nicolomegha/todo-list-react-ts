@@ -3,16 +3,18 @@ import { TodoItem } from './TodoItem';
 interface Todo {
   id: number;
   text: string;
+  completed: boolean;
 }
 
 interface TodoListProps {
   todos: Todo[];
   onRemove: (id: number) => void;
+  onToggle: (id: number) => void;
 }
 
-export const TodoList = ({ todos, onRemove }: TodoListProps) => {
+export const TodoList = ({ todos, onRemove, onToggle }: TodoListProps) => {
   if (todos.length === 0) {
-    return <p style={{ marginTop: '20px' }}>Nessuna attività presente </p>;
+    return <p style={{ marginTop: '20px' }}>Nessuna attività presente 💤</p>;
   }
 
   return (
@@ -22,7 +24,9 @@ export const TodoList = ({ todos, onRemove }: TodoListProps) => {
           key={todo.id}
           id={todo.id}
           text={todo.text}
+          completed={todo.completed}
           onRemove={onRemove}
+          onToggle={onToggle}
         />
       ))}
     </ul>

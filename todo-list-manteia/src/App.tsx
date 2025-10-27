@@ -6,6 +6,7 @@ import { TodoList } from './components/TodoList'
 interface Todo {
   id: number;
   text: string;
+  completed: boolean;
 }
 
 const STORAGE_KEY = 'todos';
@@ -31,13 +32,22 @@ function App() {
   }, [todos]);
 
   const handleAddTodo = (text: string) => {
-    const newTodo: Todo = { id: Date.now(), text };
+    const newTodo: Todo = { id: Date.now(), text, completed: false };
     setTodos(prev => [...prev, newTodo]);
   };
-
+  
   const handleRemoveTodo = (id: number) => {
     setTodos(prev => prev.filter(todo => todo.id !== id));
   };
+
+  const handleToggleCompleted = (id: number) => {
+    setTodos(prev =>
+      prev.map(todo =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+  
 
   return (
     <div style={{ padding: '20px' }}>
@@ -57,7 +67,12 @@ function App() {
       </button>
 
       <AddTodo onAdd={handleAddTodo} />
-      <TodoList todos={todos} onRemove={handleRemoveTodo} />
+      <TodoList
+  todos={todos}
+  onRemove={handleRemoveTodo}
+  onToggle={handleToggleCompleted}
+/>
+
     </div>
   );
 }
