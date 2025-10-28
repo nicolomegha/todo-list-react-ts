@@ -233,7 +233,7 @@ npm install
 Avvia il server di sviluppo:
 
 ```
-npm run dev
+npm start
 ```
 
 Apri il browser e vai su:
