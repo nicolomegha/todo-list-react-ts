@@ -1,0 +1,46 @@
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+
+  .app-container.light {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+ 
+  .app-container.dark {
+    background-color: #1e1e1e;
+    color: #ffffff;
+  }
+  
+  .app-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .theme-toggle-btn {
+    margin-bottom: 1.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #888;
+    color: #fff;
+    transition: background-color 0.2s ease;
+  }
+  
+  .theme-toggle-btn:hover {
+    background-color: #666;
+  }
+  
+  .todo-list {
+    width: 100%;
+    max-width: 500px;
+  }
+  

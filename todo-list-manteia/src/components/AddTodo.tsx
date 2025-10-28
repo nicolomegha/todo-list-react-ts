@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import './../styles/AddTodo.css';
 
 interface AddTodoProps {
   onAdd: (text: string) => void;
@@ -17,31 +18,15 @@ export const AddTodo = ({ onAdd }: AddTodoProps) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
+    <form onSubmit={handleSubmit} className="add-todo-form">
       <input
         type="text"
+        className="add-todo-input"
         placeholder="Aggiungi una nuova attività..."
         value={inputValue}
         onChange={e => setInputValue(e.target.value)}
-        style={{
-          padding: '8px',
-          marginRight: '8px',
-          border: '1px solid #ccc',
-          borderRadius: '4px',
-          width: '250px'
-        }}
       />
-      <button
-        type="submit"
-        style={{
-          padding: '8px 12px',
-          cursor: 'pointer',
-          backgroundColor: '#007bff',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '4px'
-        }}
-      >
+      <button type="submit" className="add-todo-btn">
         Aggiungi
       </button>
     </form>

@@ -14,7 +14,7 @@ interface TodoListProps {
 
 export const TodoList = ({ todos, onRemove, onToggle }: TodoListProps) => {
   if (todos.length === 0) {
-    return <p style={{ marginTop: '20px' }}>Nessuna attività presente 💤</p>;
+    return <p style={{ marginTop: '20px' }}>Nessuna attività presente </p>;
   }
 
   return (
