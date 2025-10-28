@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
+import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -16,30 +16,16 @@ interface ThemeProviderProps {
 export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<Theme>('light');
 
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
-  };
-
+  const toggleTheme = () => setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
 
   const value = useMemo(() => ({ theme, toggleTheme }), [theme]);
 
- 
-  const appStyle: React.CSSProperties = {
-    backgroundColor: theme === 'light' ? '#ffffff' : '#1e1e1e',
-    color: theme === 'light' ? '#000000' : '#ffffff',
-    minHeight: '100vh',
-    transition: 'background-color 0.3s, color 0.3s',
-  };
-
   return (
     <ThemeContext.Provider value={value}>
-      <div style={appStyle}>
-        {children}
-      </div>
+      {children}
     </ThemeContext.Provider>
   );
 };
-
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = (): ThemeContextType => {

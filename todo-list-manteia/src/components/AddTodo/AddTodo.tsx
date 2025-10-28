@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import './../styles/AddTodo.css';
+import '../../styles/AddTodo.css';
 
 interface AddTodoProps {
   onAdd: (text: string) => void;

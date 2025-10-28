@@ -1,4 +1,4 @@
-import "./../styles/TodoItem.css";
+import '../../styles/TodoItem.css';
 
 interface TodoItemProps {
   id: number;
@@ -8,13 +8,7 @@ interface TodoItemProps {
   onToggle: (id: number) => void;
 }
 
-export const TodoItem = ({
-  id,
-  text,
-  completed,
-  onRemove,
-  onToggle,
-}: TodoItemProps) => {
+export const TodoItem = ({ id, text, completed, onRemove, onToggle }: TodoItemProps) => {
   return (
     <li className="todo-item">
       <div className="todo-item-left">
